@@ -6,6 +6,7 @@ $(window).on('load', function(){
   var windowWidth;
   var windowWidthHalf;
 
+  // ウィンドウ幅を取得
   function getWindowHeight(){
     windowHeight = $(window).height();
     windowHeightHalf = $(window).height() / 2;
@@ -13,9 +14,11 @@ $(window).on('load', function(){
     windowWidthHalf = $(window).height() / 2;
   }
 
+  // ウィンドウ幅の初期値を取得
   getWindowHeight();
   headerLights();
 
+  // ウィンドウサイズを変更時、時差をつけてウィンドウ幅を取得
   $(window).on('resize', function(){
     $(".particle").remove();
     if (timer !== false) {
@@ -27,6 +30,7 @@ $(window).on('load', function(){
     }, 200);
   });
 
+  // 光の表示位置、種類、タイミングをランダムで生成
   function headerLights() {
     $.each($(".header-lights"), function(){
       //光の数
@@ -54,7 +58,7 @@ $(window).on('load', function(){
       }
     });
   }
-  //スクロールすると、光を非表示
+  //一定量スクロールすると、光を非表示
   $(window).scroll(function(){
     // 光を非表示にするスクロール量
     var distanceTop = windowHeight;
