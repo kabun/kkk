@@ -3,7 +3,7 @@ $(function(){
   // 初期化
   var _global = $(window);
   var GLOBAL_MENU_HEIGHT  = 61;  // グローバルメニューの縦幅
-  var LIGHTCOUNT          = 12;  // 光の数
+  var LIGHT_COUNT         = 12;  // 光の数
   var DELAY_WINDOW_RESIZE = 200; // ウィンドウリサイズに、光を表示する時差
 
   // セレクタ
