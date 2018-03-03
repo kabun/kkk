@@ -2,9 +2,9 @@ $(function(){
 
   // 初期化
   var _global = $(window);
-  var GLOBALMENUHEIGHT  = 61;  // グローバルメニューの縦幅
-  var LIGHTCOUNT        = 12;  // 光の数
-  var DELAYWINDOWRESIZE = 200; // ウィンドウリサイズに、光を表示する時差
+  var GLOBAL_MENU_HEIGHT  = 61;  // グローバルメニューの縦幅
+  var LIGHTCOUNT          = 12;  // 光の数
+  var DELAY_WINDOW_RESIZE = 200; // ウィンドウリサイズに、光を表示する時差
 
   // セレクタ
   var _headerLights     = ".header-lights";
@@ -67,7 +67,7 @@ $(function(){
     }
     timer = setTimeout(function() {
       headerLights();
-    }, DELAYWINDOWRESIZE);
+    }, DELAY_WINDOW_RESIZE);
   }
 
   // 光を表示・非表示切り替え
@@ -75,7 +75,7 @@ $(function(){
     // 光を非表示にするスクロール量
     var distanceTop = windowHeight = _global.height();
     // スクロール位置に達しているかどうかを判別して、表示切り替え
-    var css = (_global.scrollTop() > distanceTop - GLOBALMENUHEIGHT) ? 'none' : 'block';
+    var css = (_global.scrollTop() > distanceTop - GLOBAL_MENU_HEIGHT) ? 'none' : 'block';
     // 光を非表示
     $(_headerLightsArea).css('display', css);
   }
