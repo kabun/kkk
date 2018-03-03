@@ -29,7 +29,7 @@ $(function(){
     var windowWidthHalf  = _global.height() / 2;
 
     $.each($(_headerLights), function(){
-      for(var i = 0; i <= LIGHTCOUNT; i++) {
+      for(var i = 0; i <= LIGHT_COUNT; i++) {
         //光が出現するタイミング
         var animationDelay   = Math.random()*10;
         //X座標、Y座標
