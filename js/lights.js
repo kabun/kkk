@@ -75,7 +75,7 @@ $(function(){
     // 光を非表示にするスクロール量
     var distanceTop = windowHeight = _global.height();
     // スクロール位置に達しているかどうかを判別して、表示切り替え
-    var css = (_global.scrollTop() > distanceTop - GLOBALMENUHEIGHT) ? 'block' : 'none';
+    var css = (_global.scrollTop() > distanceTop - GLOBALMENUHEIGHT) ? 'none' : 'block';
     // 光を非表示
     $(_headerLightsArea).css('display', css);
   }
