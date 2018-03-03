@@ -1,76 +1,82 @@
 $(function(){
   // 初期化
-  var timer = false;
-  var modalwindowHeight;
-  var scroll_top;
+  var _global      = $(window);
+  var _body        = $('body');
+  var timer        = false;
+  var scrollTop;         // スクロール位置 記録用
+  var DELAY_RESIZE = 200; // ウィンドウリサイズに、光を表示する時差
+  var FADEIN_TIME  = 200; // フェードイン時間
+  var FADEOUT_TIME = 200; // フェードアウト時間
+  var ADJUST_HIGHT = 20;  // モーダル縦幅調整
 
-  function getWindowHeight() {
-    modalwindowHeight = $(window).height();
-  }
+  // セレクタ
+  var modalOverlay = ".modal-overlay";
+  var modalInner   = ".modal-inner";
+  var modalClose   = ".modal-close";
+  var globalNav    = ".global-nav-wrapper";
+  var thumItem     = ".section-txt__sample-thum-item";
 
-  // ウィンドウリサイズ
-  $(window).on('resize', function(){
+  // モーダルオープン時、ウィンドウをリサイズしたらサイズを調整
+  window.addEventListener("resize", resizeModal, false);
+
+  // モーダルリサイズ
+  function resizeModal(){
     if (timer !== false) {
-        clearTimeout(timer);
+      clearTimeout(timer);
     }
     timer = setTimeout(function() {
-      getWindowHeight();
-      $('.modal-overlay').css('max-height', modalwindowHeight);
-      $('.modal-inner').css('max-height', modalwindowHeight + 80 + "px");
-    }, 200);
-  );
+      var _height = _global.height();
+      $(modalOverlay).css('height', _height);
+      $(modalInner).css('height', _height - ADJUST_HIGHT + "px");
+    }, DELAY_RESIZE);
+  }
 
-  // モーダルオープン時、スクロール禁止
-  var width = window.innerWidth - document.body.clientWidth;
-  var newStyle = document.createElement('style');
-  document.head.appendChild(newStyle);
-  newStyle.sheet.insertRule('body.enabled_modal { overflow: hidden; }', 0);
-
-  // モーダルオープン時、スクロール禁止解除
-  $(document).on('click', '.section-txt__sample-thum-item', function() {
-    $('body').addClass('enabled_modal');
-    $('.global-nav-wrapper').hide();
-    scroll_top = $(window).scrollTop();
-    $('body').css({
+  // サムネイル画像押下時、bodyのスクロール禁止
+  $(document).on('click', thumItem, function() {
+    $(_body).addClass('enabled_modal');
+    $(globalNav).hide();
+    scrollTop = _global.scrollTop();
+    $(_body).css({
       'position': 'fixed',
       'width': '100%',
-      'top': -scroll_top
+      'overflow': 'hidden'
     });
   });
 
-  // モーダルクローズ時、windowなどの処理
-  $(document).on('click', '.modal-close', function() {
-    $('.global-nav-wrapper').fadeIn(200);
-    $('body').css({
+  // 「xボタン」または、「閉じるボタン」押下時、bodyのスクロール禁止解除
+  $(document).on('click', modalClose, function() {
+    $(globalNav).fadeIn(FADEIN_TIME);
+    $(_body).css({
       'position': 'relative',
       'width': '',
-      'top': ''
+      'top': '',
+      'overflow': ''
     });
-    $('body').removeClass('enabled_modal');
-    $(window).scrollTop(scroll_top);
+    $(_body).removeClass('enabled_modal');
+    _global.scrollTop(scrollTop);
   });
 
-  // モーダルオープン時、内容を表示
+  // サムネイル画像押下時、モーダルを表示
   $(document).on('click', '[data-openmodal]', function(e) {
-    getWindowHeight();
-    $('.modal-overlay').fadeOut(200);
+    var _height = _global.height();
+    $(modalOverlay).fadeOut(FADEOUT_TIME);
     var targetOpenModalId = $(this).attr('data-openmodal');
     var $targetOpenOverlay = $('#' + targetOpenModalId);
-    var $targetOpenInner = $('#' + targetOpenModalId + ' .modal-inner');
+    var $targetOpenInner = $('#' + targetOpenModalId + ' ' + modalInner);
     $targetOpenOverlay.addClass('active-modal');
-    $targetOpenOverlay.css({ height: modalwindowHeight + 'px' });
-    $targetOpenInner.css({ height: (modalwindowHeight + 80) + 'px' });
-    $targetOpenOverlay.fadeIn(200);
+    $targetOpenOverlay.css({ 'height': _height + 'px' });
+    $targetOpenInner.css({ 'height': (_height - ADJUST_HIGHT) + 'px' });
+    $targetOpenOverlay.fadeIn(FADEIN_TIME);
     $targetOpenInner.scrollTop(-1);
   });
 
-  // モーダルクローズ時、内容を非表示
+  //「xボタン」または、「閉じるボタン」押下時、モーダルを非表示
   $(document).on('click', '[data-closemodal]', function(e) {
     var targetCloseModalId = $(this).attr('data-closemodal');
     var $targetCloseOverlay = $('#' + targetCloseModalId);
-    var $targetCloseInner = $('#' + targetCloseModalId + ' .modal-inner');
+    var $targetCloseInner = $('#' + targetCloseModalId + ' ' + modalInner);
     $targetCloseOverlay.removeClass('active-modal');
     $targetCloseInner.scrollTop(-1);
-    $targetCloseOverlay.fadeOut(200);
+    $targetCloseOverlay.fadeOut(FADEOUT_TIME);
   });
 });
