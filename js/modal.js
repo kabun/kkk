@@ -26,13 +26,13 @@ $(function(){
     timer = setTimeout(function() {
       var _height = _global.height();
       $(modalOverlay).css('height', _height);
-      $(modalInner).css('height', _height - ADJUST_HIGHT + "px");
+      $(modalInner).css(  'height', _height - ADJUST_HIGHT + "px");
     }, DELAY_RESIZE);
   }
 
   // サムネイル画像押下時、モーダルを表示。または アローを押下時、モーダル内容を変更
   $(document).on('click', '[data-openmodal]', function(e) {
-    //モーダルをすでに表示しているかどうかで出し分け
+    // モーダルをarrowで開いたか、サムネイル画像で開いたかで出し分け
     if ($(this).data('openmodal-type') === "arrow") {
       // すでに表示しているモーダルを隠す
       $(modalOverlay).fadeOut(FADEOUT_TIME);
@@ -54,8 +54,8 @@ $(function(){
     var $targetOpenOverlay = $('#' + targetOpenModalId);
     var $targetOpenInner   = $('#' + targetOpenModalId + ' ' + modalInner);
     $targetOpenOverlay.addClass('active-modal');
-    $targetOpenOverlay.css({ 'height': _height + 'px' });
-    $targetOpenInner.css({ 'height': (_height - ADJUST_HIGHT) + 'px' });
+    $targetOpenOverlay.css({'height': _height + 'px'});
+    $targetOpenInner.css({  'height': (_height - ADJUST_HIGHT) + 'px'});
     $targetOpenOverlay.fadeIn(FADEIN_TIME);
   });
 
