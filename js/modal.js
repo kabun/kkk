@@ -67,7 +67,6 @@ $(function(){
     $(_body).css({
       'position': 'relative',
       'width'   : '',
-      'top'     : '',
       'overflow': ''
     });
     // スクロール位置を元に戻す
