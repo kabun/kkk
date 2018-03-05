@@ -16,10 +16,7 @@ $(function(){
   var globalNav    = ".global-nav-wrapper";
 
   // モーダルオープン時、ウィンドウをリサイズしたらサイズを調整
-  window.addEventListener("resize", resizeModal, false);
-
-  // モーダルリサイズ
-  function resizeModal(){
+  $(window).on('resize', function(){
     if (timer !== false) {
       clearTimeout(timer);
     }
@@ -28,7 +25,7 @@ $(function(){
       $(modalOverlay).css('height', _height);
       $(modalInner).css(  'height', _height - ADJUST_HIGHT + "px");
     }, DELAY_RESIZE);
-  }
+  });
 
   // サムネイル画像押下時、モーダルを表示。または アローを押下時、モーダル内容を変更
   $(document).on('click', '[data-openmodal]', function(e) {
