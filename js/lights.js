@@ -24,9 +24,9 @@ $(function(){
   function addHeaderLights() {
     // ウィンドウ幅を取得
     var windowHeight     = _global.height();
-    var windowHeightHalf = _global.height() / 2;
+    var windowHeightHalf = windowHeight / 2;
     var windowWidth      = _global.height();
-    var windowWidthHalf  = _global.height() / 2;
+    var windowWidthHalf  = windowWidth / 2;
 
     $.each($(headerLights), function(){
       for(var i = 0; i <= LIGHT_COUNT; i++) {
