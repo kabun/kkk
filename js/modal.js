@@ -3,7 +3,7 @@ $(function(){
   var _global      = $(window);
   var _body        = $('body');
   var timer        = false;
-  var currentScrollTop;          // スクロール位置 記録用
+  var currentScrollTop;   // スクロール位置 記録用
   var DELAY_RESIZE = 200; // ウィンドウリサイズ時に、光を表示する時差
   var FADEIN_TIME  = 200; // フェードイン時間
   var FADEOUT_TIME = 200; // フェードアウト時間
