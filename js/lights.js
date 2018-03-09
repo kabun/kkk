@@ -31,7 +31,7 @@ $(function(){
     $.each($(headerLights), function(){
       for(var i = 0; i <= LIGHT_COUNT; i++) {
         //光が出現するタイミング
-        var animationDelay   = Math.random()*10;
+        var animationDelay   = Math.random()*7;
         //X座標、Y座標
         var defaultPositionX = (function(){
           return Math.floor(Math.ceil(Math.random()*windowWidth)-windowWidthHalf);
@@ -41,18 +41,16 @@ $(function(){
         })();
         //スピード
         var lightType  = Math.floor(Math.random()*2);
-        var lightSpeed = Math.floor(Math.random()*2);
-
-        var rorateWay  = (lightSpeed) ? "rorate-way-fast" : "rorate-way-low";
+        var rorateWay  = (lightType === 0) ? "rorate-way-fast" : "rorate-way-low";
 
         //光のオブジェクトを生成
         $(this).append('<span class="particle ' + rorateWay +
-        '" style="top:' + defaultPositionY +
-        'px; left:' + defaultPositionX +
-        'px;-webkit-animation-delay: ' + animationDelay +
-        's;animation-delay: ' + animationDelay +
-        's;"><img src="./img/light_' + lightType +
-        '.png" width="15" height="15" alt=""></span>');
+        '" style="top:' + defaultPositionY + 'px;' +
+        ' left:' + defaultPositionX +'px;' +
+        '-webkit-animation-delay: ' + animationDelay + 's;' +
+        'animation-delay: ' + animationDelay + 's;' + '">' +
+        '<img src="./img/light_' + lightType + '.png"' +
+        ' width="15" height="15" alt=""></span>');
       }
     });
   }
