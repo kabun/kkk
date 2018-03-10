@@ -17,7 +17,7 @@ $(function(){
   var modalArrow   = ".modal-arrow";
 
   // ウィンドウリサイズ時、モーダルもリサイズ
-  $(window).on('resize', function(){
+  _global.on('resize', function(){
     if (timer !== false) {
       clearTimeout(timer);
     }
