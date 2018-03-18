@@ -1,30 +1,37 @@
 $(function(){
   // 初期化
-  var _global      = $(window);
-  var _body        = $('body');
-  var timer        = false;
-  var currentScrollTop;   // スクロール位置 記録用
-  var DELAY_RESIZE = 200; // ウィンドウリサイズ時に、光を表示する時差
-  var FADEIN_TIME  = 200; // フェードイン時間
-  var FADEOUT_TIME = 200; // フェードアウト時間
-  var ADJUST_HIGHT = 20;  // モーダル縦幅調整
+  var currentScrollTop,   // スクロール位置 記録用
+      timer        = false,
+      DELAY_RESIZE = 200, // ウィンドウリサイズ時に、光を表示する時差
+      FADEIN_TIME  = 200, // フェードイン時間
+      FADEOUT_TIME = 200, // フェードアウト時間
+      ADJUST_HIGHT = 20;  // モーダル縦幅調整
 
   // セレクタ
-  var modalOverlay = ".modal-overlay";
-  var modalInner   = ".modal-inner";
-  var modalClose   = ".modal-close";
-  var globalNav    = ".global-nav-wrapper";
-  var modalArrow   = ".modal-arrow";
+  var modalOverlay = ".modal-overlay",
+      modalInner   = ".modal-inner",
+      modalClose   = ".modal-close",
+      globalNav    = ".global-nav-wrapper",
+      modalArrow   = ".modal-arrow";
+
+  // DOM
+  var $_global      = $(window),
+      $_body        = $('body'),
+      $modalOverlay = $(modalOverlay),
+      $modalInner   = $(modalInner),
+      $modalClose   = $(modalClose),
+      $globalNav    = $(globalNav),
+      $modalArrow   = $(modalArrow);
 
   // ウィンドウリサイズ時、モーダルもリサイズ
-  _global.on('resize', function(){
+  $_global.on('resize', function(){
     if (timer !== false) {
       clearTimeout(timer);
     }
     timer = setTimeout(function() {
-      var _height = _global.height();
-      $(modalOverlay).css('height', _height);
-      $(modalInner).css(  'height', _height - ADJUST_HIGHT + "px");
+      var _height = $_global.height();
+      $modalOverlay.css('height', _height);
+      $modalInner.css(  'height', _height - ADJUST_HIGHT + "px");
     }, DELAY_RESIZE);
   });
 
@@ -45,22 +52,22 @@ $(function(){
         $video[i].pause();
       }
       // すでに表示しているモーダルを隠す
-      $(modalOverlay).fadeOut(FADEOUT_TIME);
+      $modalOverlay.fadeOut(FADEOUT_TIME);
     } else {
       // モーダルをサムネイル画像で開いた場合
       // グローバルナビを隠す
-      $(globalNav).hide();
+      $globalNav.hide();
       //スクロール位置を記録
-      currentScrollTop = _global.scrollTop();
+      currentScrollTop = $_global.scrollTop();
       // bodyのスクロール禁止
-      $(_body).css({
+      $($_body).css({
         'position': 'fixed',
         'width'   : '100%',
         'overflow': 'hidden'
       });
     }
     // モーダル表示
-    var _height = _global.height();
+    var _height = $_global.height();
     var targetOpenModalId  = $(this).data('openmodal');
     var $targetOpenOverlay = $('#' + targetOpenModalId);
     var $targetOpenInner   = $('#' + targetOpenModalId + ' ' + modalInner);
@@ -75,15 +82,15 @@ $(function(){
   //「xボタン」または、「閉じるボタン」押下時、モーダルを隠す
   $(document).on('click', '[data-closemodal]', function(e) {
     // グローバルナビを表示
-    $(globalNav).fadeIn(FADEIN_TIME);
+    $globalNav.fadeIn(FADEIN_TIME);
     // bodyのスクロール禁止解除
-    $(_body).css({
+    $($_body).css({
       'position': 'relative',
       'width'   : '',
       'overflow': ''
     });
     // スクロール位置を元に戻す
-    _global.scrollTop(currentScrollTop);
+    $_global.scrollTop(currentScrollTop);
     // モーダルを隠す
     var targetCloseModalId  = $(this).data('closemodal');
     var $targetCloseOverlay = $('#' + targetCloseModalId);
