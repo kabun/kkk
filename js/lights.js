@@ -17,7 +17,7 @@ $(function(){
   window.addEventListener("load", addHeaderLights, false);
 
   // ウィンドウリサイズ時、光を再描画
-    window.addEventListener("resize", resizeWindow, false);
+  window.addEventListener("resize", resizeWindow, false);
 
   // 一定量スクロールすると、光を削除したり、再描画する
   window.addEventListener("scroll", hiddenLights, false);
