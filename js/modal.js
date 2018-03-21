@@ -45,7 +45,7 @@ $(function() {
     stopVideo: function() {
       // 動画再生を止める
       var $video = $('video');
-      for(var i = 0; i < $video.length; i++){
+      for(var i = 0; i < video.length; i++){
         $video[i].pause();
       }
     }
@@ -136,8 +136,7 @@ $(function() {
 
   // arrowにカーソルが重なったら、arrowの色を変更。
   // 後からappendした要素のhoverは、この描き方じゃないと動かない。
-  var $modalArrow = $(modalArrow);
-  $(document).on('mouseenter',$modalArrow,function() {
+  $(document).on('mouseenter',modalArrow,function() {
     $(this).addClass('hover');
   });
   $(document).on('mouseleave',$modalArrow,function() {
