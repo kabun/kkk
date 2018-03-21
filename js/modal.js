@@ -15,7 +15,7 @@ $(function() {
       modalInner   = ".modal-inner",        // モーダルインナー
       modalClose   = ".modal-close",        // モーダルクローズトリガー
       modalArrow   = ".modal-arrow",　      // arrow要素
-      sectionTitle   = ".section-title",    // arrowを配置する要素
+      sectionTitle = ".section-title",      // arrowを配置する要素
       globalNav    = ".global-nav-wrapper"; // グローバルナビ
 
   // DOM
@@ -112,8 +112,7 @@ $(function() {
   //「xボタン」または、「閉じるボタン」押下時、モーダルを隠す
   $document.on('click', '[data-closemodal]', function(e) {
     // グローバルナビを表示
-    $globalNav.fadeIn
-    (FADEIN_TIME);
+    $globalNav.fadeIn(FADEIN_TIME);
     // bodyのスクロール禁止解除
     $body.css({
       'position': 'relative',
