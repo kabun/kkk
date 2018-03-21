@@ -16,6 +16,7 @@ $(function() {
   var modalOverlay = ".modal-overlay",
       modalInner   = ".modal-inner",
       modalClose   = ".modal-close",
+      modalArrow   = ".modal-arrow",
       globalNav    = ".global-nav-wrapper";
 
   // DOM
@@ -39,15 +40,23 @@ $(function() {
     }, DELAY_RESIZE);
   });
 
+  // 共通関数
+  var generalFnc = {
+    stopVideo: function() {
+      // 動画再生を止める
+      var $video = $('video');
+      for(var i = 0; i < $video.length; i++){
+        $video[i].pause();
+      }
+    }
+  }
+
   // サムネイル画像押下時、モーダルを表示。または アローを押下時、モーダル内容を変更
   $document.on('click', '[data-openmodal]', function(e) {
     if ($(this).data('openmodal-type') === "arrow") {
       // モーダルをarrowで開いた場合
       // 動画再生を止める
-      var $video = $('video');
-      for(var i = 0; i < video.length; i++){
-        $video[i].pause();
-      }
+      generalFnc.stopVideo();
       // すでに表示しているモーダルを隠す
       $modalOverlay.fadeOut(FADEOUT_TIME);
     } else {
@@ -121,14 +130,17 @@ $(function() {
     $targetCloseOverlay.fadeOut(FADEOUT_TIME);
     // モーダルウィンドウのスクロール位置をリセット
     $targetCloseInner.scrollTop(0);
+    // 動画再生を止める
+    generalFnc.stopVideo();
   });
 
   // arrowにカーソルが重なったら、arrowの色を変更。
   // 後からappendした要素のhoverは、この描き方じゃないと動かない。
-  $(document).on('mouseenter','.modal-arrow',function() {
+  var $modalArrow = $(modalArrow);
+  $(document).on('mouseenter',$modalArrow,function() {
     $(this).addClass('hover');
   });
-  $(document).on('mouseleave','.modal-arrow',function() {
+  $(document).on('mouseleave',$modalArrow,function() {
     $(this).removeClass('hover');
   });
 
