@@ -139,7 +139,7 @@ $(function() {
   $(document).on('mouseenter',modalArrow,function() {
     $(this).addClass('hover');
   });
-  $(document).on('mouseleave',$modalArrow,function() {
+  $(document).on('mouseleave',modalArrow,function() {
     $(this).removeClass('hover');
   });
 
