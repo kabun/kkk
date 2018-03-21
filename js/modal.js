@@ -1,16 +1,14 @@
-/*jslint browser: true*/
-/*global $, jQuery, alert*/
-
 $(function() {
+
   // 初期化
-  var currentScrollTop,   // スクロール位置 記録用
-      activeModalIdNum,   // アクティブモーダルID 記録用
-      activeModalType,    // アクティブモーダルの種類 記録用
-      timer        = false,
-      DELAY_RESIZE = 200, // ウィンドウリサイズ時に、光を表示する時差
-      FADEIN_TIME  = 200, // フェードイン時間
-      FADEOUT_TIME = 200, // フェードアウト時間
-      ADJUST_HIGHT = 20;  // モーダル縦幅調整
+  var currentScrollTop,      // スクロール位置 記録用
+      activeModalIdNum,      // アクティブモーダルID 記録用
+      activeModalType,       // アクティブモーダルの種類 記録用
+      timer        = false,  // 時差用
+      DELAY_RESIZE = 200,    // ウィンドウリサイズ時に、光を表示する時差
+      FADEIN_TIME  = 200,    // フェードイン時間
+      FADEOUT_TIME = 200,    // フェードアウト時間
+      ADJUST_HIGHT = 20;     // モーダル縦幅調整
 
   // セレクタ
   var modalOverlay = ".modal-overlay",      // 黒いモーダル背景
@@ -46,7 +44,7 @@ $(function() {
     stopVideo: function() {
       // 動画再生を止める
       var $video = $('video');
-      for(var i = 0; i < video.length; i++){
+      for(var i = 0; i < $video.length; i++){
         $video[i].pause();
       }
     }
@@ -73,6 +71,7 @@ $(function() {
         'overflow': 'hidden'
       });
     }
+
     // モーダル表示
     var _height = $window.height();
         targetOpenModalName  = $(this).data('openmodal'),
@@ -136,7 +135,7 @@ $(function() {
   });
 
   // arrowにカーソルが重なったら、arrowの色を変更。
-  // 後からappendした要素のhoverは、この描き方じゃないと動かない。
+  // 後から追加した要素のhoverは、この描き方じゃないと動かない。
   $(document).on('mouseenter',modalArrow,function() {
     $(this).addClass('hover');
   });
