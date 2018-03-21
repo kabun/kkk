@@ -13,11 +13,12 @@ $(function() {
       ADJUST_HIGHT = 20;  // モーダル縦幅調整
 
   // セレクタ
-  var modalOverlay = ".modal-overlay",
-      modalInner   = ".modal-inner",
-      modalClose   = ".modal-close",
-      modalArrow   = ".modal-arrow",
-      globalNav    = ".global-nav-wrapper";
+  var modalOverlay = ".modal-overlay",      // 黒いモーダル背景
+      modalInner   = ".modal-inner",        // モーダルインナー
+      modalClose   = ".modal-close",        // モーダルクローズトリガー
+      modalArrow   = ".modal-arrow",　      // arrow要素
+      sectionTitle   = ".section-title",    // arrowを配置する要素
+      globalNav    = ".global-nav-wrapper"; // グローバルナビ
 
   // DOM
   var $window       = $(window),
@@ -93,13 +94,13 @@ $(function() {
         min                = 1,
         max                = (Number($('.' + activeModalName).length));
     if(activeModalIdNum <= max && activeModalIdNum > min) {
-      $targetOpenOverlay.find('.section-title').prepend(
+      $targetOpenOverlay.find(sectionTitle).prepend(
         '<div class="modal-arrow arrow-box arrow-left" ' +
         'data-openmodal="' + prevModalName + '" data-openmodal-type="arrow"></div>'
       );
     }
     if(activeModalIdNum >= min && activeModalIdNum < max) {
-      $targetOpenOverlay.find('.section-title').prepend(
+      $targetOpenOverlay.find(sectionTitle).prepend(
         '<div class="modal-arrow arrow-box arrow-right" ' +
         'data-openmodal="' + nextModalName + '" data-openmodal-type="arrow"></div>'
       );
